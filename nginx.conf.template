@@ -1,0 +1,45 @@
+# Keep the real client IP for the API's rate limiter: trust X-Real-IP when a proxy (e.g. Caddy)
+# is in front of this container, otherwise use the socket address.
+map $http_x_real_ip $real_ip {
+    default $http_x_real_ip;
+    ""      $remote_addr;
+}
+
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+    client_max_body_size 6m;
+
+    add_header X-Content-Type-Options nosniff;
+    add_header Referrer-Policy strict-origin-when-cross-origin;
+
+    # Docker's DNS + a variable => nginx re-resolves the backend, so recreating `api` doesn't break the proxy.
+    # Set NGINX_RESOLVER if you run outside Docker.
+    resolver ${NGINX_RESOLVER} valid=10s;
+
+    location /api/ {
+        set $api_upstream ${API_UPSTREAM};
+        proxy_pass $api_upstream;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $real_ip;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # hashed build assets can be cached forever
+    location /assets/ {
+        expires 1y;
+        try_files $uri =404;
+    }
+
+    # admin single-page app
+    location /admin/ {
+        try_files $uri $uri/ /admin/index.html;
+    }
+
+    # public single-page app
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
