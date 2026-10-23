@@ -20,7 +20,7 @@ function Layout() {
           <NavLink to="/contact">Contact</NavLink>
           {user ? (
             <>
-              <span className="muted">{user.full_name}</span>
+              <span className="muted">{user.first_name}</span>
               <button className="link" onClick={logout}>Log out</button>
             </>
           ) : (

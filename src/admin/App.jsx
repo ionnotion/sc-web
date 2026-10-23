@@ -29,7 +29,7 @@ function Shell() {
           ))}
         </nav>
         <div className="who">
-          <div>{user.full_name}</div>
+          <div>{user.first_name + " " + user.last_name}</div>
           <small>{ROLES[user.role]}</small>
           <div><button className="link" onClick={logout}>Log out</button></div>
         </div>

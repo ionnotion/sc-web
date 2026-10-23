@@ -15,7 +15,7 @@ export default function Overview() {
 
   return (
     <>
-      <h1>Welcome, {user.full_name}</h1>
+      <h1>Welcome, {user.fiirst_name}</h1>
       <p className="muted">Signed in as {ROLES[user.role]}.</p>
       <div className="stats">
         {isEnr && <Link to="/enrollments?status=pending" className="stat"><b>{count(pending)}</b><span>Pending applications</span></Link>}
