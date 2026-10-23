@@ -6,7 +6,7 @@ import { useAuth } from '../auth.js';
 export function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
-  const [f, setF] = useState({ full_name: '', email: '', phone: '', password: '' });
+  const [f, setF] = useState({ first_name: '', last_name: '', email: '', phone: '', password: '' });
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
@@ -28,7 +28,8 @@ export function Register() {
     <form className="form narrow" onSubmit={submit}>
       <h1>Create an account</h1>
       <Alert>{err}</Alert>
-      <Field label="Full name"><input value={f.full_name} onChange={set('full_name')} required /></Field>
+      <Field label="First name"><input value={f.first_name} onChange={set('first_name')} required /></Field>
+      <Field label="Last name"><input value={f.last_name} onChange={set('last_name')} required /></Field>
       <Field label="Email"><input type="email" value={f.email} onChange={set('email')} required /></Field>
       <Field label="Phone"><input value={f.phone} onChange={set('phone')} /></Field>
       <Field label="Password (8+ characters)">
