@@ -94,7 +94,7 @@ export default function Users() {
                 const self = u.id === me.id;
                 return (
                   <tr key={u.id}>
-                    <td>{u.full_name}{self && <small className="muted"> (you)</small>}</td>
+                    <td>{u.first_name + " " + u.last_name}{self && <small className="muted"> (you)</small>}</td>
                     <td>{u.email}</td>
                     <td>
                       <select value={u.role} disabled={self} onChange={(e) => patch(u, { role: e.target.value })}>
