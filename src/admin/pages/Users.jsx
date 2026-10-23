@@ -9,7 +9,7 @@ const ADMIN_ROLES = ['news_admin', 'enrollment_admin', 'super_admin'];
 
 function AdminCreateForm({ onDone }) {
   const { api } = useAuth();
-  const empty = { full_name: '', email: '', phone: '', password: '', role: 'news_admin' };
+  const empty = { first_name: '', last_name: '', email: '', phone: '', password: '', role: 'news_admin' };
   const [f, setF] = useState(empty);
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
@@ -34,7 +34,8 @@ function AdminCreateForm({ onDone }) {
       <h3>Register a new admin</h3>
       <Alert>{err}</Alert>
       <div className="grid2">
-        <Field label="Full name"><input value={f.full_name} onChange={set('full_name')} required /></Field>
+        <Field label="First name"><input value={f.first_name} onChange={set('first_name')} required /></Field>
+        <Field label="Last name"><input value={f.last_name} onChange={set('last_name')} required /></Field>
         <Field label="Email"><input type="email" value={f.email} onChange={set('email')} required /></Field>
         <Field label="Phone"><input value={f.phone} onChange={set('phone')} /></Field>
         <Field label="Temporary password (8+ chars)">
