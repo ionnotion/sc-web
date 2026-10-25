@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SITE } from '../../lib/config.js';
+import ThemeToggle from '../../lib/ThemeToggle.jsx';
 import { Alert, Field } from '../../lib/ui.jsx';
 import { useAuth } from '../auth.js';
 
@@ -23,6 +24,8 @@ export default function Login() {
   }
 
   return (
+    <>
+    <div className="login-theme"><ThemeToggle /></div>
     <form className="form narrow login-box" onSubmit={submit}>
       <h1>{SITE.name} admin</h1>
       <Alert>{err}</Alert>
@@ -31,5 +34,6 @@ export default function Login() {
       <button className="btn" disabled={busy}>{busy ? 'Signing in…' : 'Log in'}</button>
       <p className="muted">Admin accounts are created by a super admin.</p>
     </form>
+    </>
   );
 }

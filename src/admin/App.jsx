@@ -1,6 +1,7 @@
 import { NavLink, Outlet, Route, Routes } from 'react-router-dom';
 import { ENROLLMENT_ROLES, NEWS_ROLES, ROLES, SITE, SUPER_ROLES } from '../lib/config.js';
 import { Alert } from '../lib/ui.jsx';
+import ThemeToggle from '../lib/ThemeToggle.jsx';
 import { useAuth } from './auth.js';
 import Login from './pages/Login.jsx';
 import Overview from './pages/Overview.jsx';
@@ -34,6 +35,7 @@ function Shell() {
           <div>{user.first_name + " " + user.last_name}</div>
           <small>{ROLES[user.role]}</small>
           <div><button className="link" onClick={logout}>Log out</button></div>
+          <div style={{ marginTop: 10 }}><ThemeToggle /></div>
         </div>
       </aside>
       <main className="content"><Outlet /></main>

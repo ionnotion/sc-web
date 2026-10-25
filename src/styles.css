@@ -1,5 +1,8 @@
 :root{--bg:#fff;--fg:#1d2733;--muted:#5d6b7a;--accent:#1f6f50;--accent-fg:#fff;--card:#f4f7f6;--line:#dde4e1;--danger:#b3261e}
-@media (prefers-color-scheme:dark){:root{--bg:#121816;--fg:#e6ecea;--muted:#9fb0aa;--accent:#5fc59a;--accent-fg:#0d1512;--card:#1b2420;--line:#2a3631;--danger:#f2877f}}
+/* theme: explicit choice (data-theme) wins; otherwise follow the OS */
+:root{color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#121816;--fg:#e6ecea;--muted:#9fb0aa;--accent:#5fc59a;--accent-fg:#0d1512;--card:#1b2420;--line:#2a3631;--danger:#f2877f}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#121816;--fg:#e6ecea;--muted:#9fb0aa;--accent:#5fc59a;--accent-fg:#0d1512;--card:#1b2420;--line:#2a3631;--danger:#f2877f}
 *{box-sizing:border-box}
 body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
 a{color:var(--accent)}
@@ -94,3 +97,16 @@ dt{font-weight:600;margin-top:10px}dd{margin:0}
 .lightbox-img{max-width:100%;max-height:calc(100vh - 120px);object-fit:contain;margin:0 auto;display:block}
 .pdf-frame{width:100%;height:calc(100vh - 120px);border:0}
 .file-preview{max-height:120px;border-radius:8px;border:1px solid var(--line)}
+/* theme toggle button */
+.theme-toggle{background:none;border:1px solid var(--line);border-radius:999px;padding:3px 12px;color:var(--fg);font:inherit;font-size:.85rem;cursor:pointer}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.theme-toggle{display:inline-grid;justify-items:center;white-space:nowrap}
+.theme-toggle>span{grid-area:1/1}
+.theme-toggle .tt-hidden{visibility:hidden}
+.login-theme{display:flex;justify-content:flex-end;padding:12px 16px}
+/* brand bars: always light green, in light AND dark mode */
+:root{--bar-bg:#d9efe1;--bar-fg:#0f3d2b;--bar-muted:#3b6651;--bar-accent:#14633f;--bar-line:#b4d9c3}
+.top,footer,.side{
+    background:var(--bar-bg);color:var(--bar-fg);
+    --fg:var(--bar-fg);--muted:var(--bar-muted);--accent:var(--bar-accent);--accent-fg:#fff;--line:var(--bar-line);--card:var(--bar-line);
+}

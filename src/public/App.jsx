@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet, Route, Routes } from 'react-router-dom';
 import { SITE } from '../lib/config.js';
+import ThemeToggle from '../lib/ThemeToggle.jsx';
 import { useAuth } from './auth.js';
 import { About, Contact, Home, NotFound } from './pages/Static.jsx';
 import { News, NewsDetail } from './pages/News.jsx';
@@ -20,7 +21,7 @@ function Layout() {
           <NavLink to="/contact">Contact</NavLink>
           {user ? (
             <>
-              <span className="muted">{user.first_name}</span>
+              <span className="muted">{user.full_name}</span>
               <button className="link" onClick={logout}>Log out</button>
             </>
           ) : (
@@ -29,6 +30,7 @@ function Layout() {
               <Link to="/register" className="btn small">Register</Link>
             </>
           )}
+          <ThemeToggle />
         </nav>
       </header>
       <main><Outlet /></main>
