@@ -31,7 +31,9 @@ function YearForm({ initial, onDone, onCancel }) {
       <div className="grid2">
         <Field label="Name (e.g. 2026/2027)"><input value={f.name} onChange={set('name')} required /></Field>
         <span />
-        <Field label="Start date"><input type="date" value={f.start_date} onChange={set('start_date')} required /></Field>
+          <Field label={f.id ? 'Start date' : 'Start date (tomorrow or later)'}>
+            <input type="date" value={f.start_date} onChange={set('start_date')} min={f.id ? undefined : tomorrowISO()} required />
+          </Field>
         <Field label="End date"><input type="date" value={f.end_date} onChange={set('end_date')} required /></Field>
       </div>
       <label className="check">

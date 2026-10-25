@@ -8,3 +8,10 @@ export function qs(obj) {
   const s = p.toString();
   return s ? '?' + s : '';
 }
+
+export function tomorrowISO() {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
