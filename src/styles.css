@@ -110,3 +110,7 @@ dt{font-weight:600;margin-top:10px}dd{margin:0}
     background:var(--bar-bg);color:var(--bar-fg);
     --fg:var(--bar-fg);--muted:var(--bar-muted);--accent:var(--bar-accent);--accent-fg:#fff;--line:var(--bar-line);--card:var(--bar-line);
 }
+/* sticky footer */
+.page{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.page>main{flex:1 0 auto;width:100%}
+.page>footer{flex-shrink:0}

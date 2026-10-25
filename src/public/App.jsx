@@ -10,7 +10,7 @@ import { EnrollmentDetail, EnrollmentList, EnrollmentNew, RequireAuth } from './
 function Layout() {
   const { user, logout } = useAuth();
   return (
-    <>
+    <div className="page">
       <header className="top">
         <Link to="/" className="brand">{SITE.name}</Link>
         <nav>
@@ -35,7 +35,7 @@ function Layout() {
       </header>
       <main><Outlet /></main>
       <footer>© {new Date().getFullYear()} {SITE.name}</footer>
-    </>
+    </div>
   );
 }
 
