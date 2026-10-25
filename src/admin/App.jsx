@@ -8,6 +8,7 @@ import { NewsList, PostForm } from './pages/News.jsx';
 import Years from './pages/Years.jsx';
 import { EnrollmentDetail, Enrollments } from './pages/Enrollments.jsx';
 import Users from './pages/Users.jsx';
+import Profile from './pages/Profile.jsx';
 
 const NAV = [
   { to: '/', label: 'Overview', roles: null, end: true },
@@ -15,6 +16,7 @@ const NAV = [
   { to: '/years', label: 'Academic years', roles: ENROLLMENT_ROLES },
   { to: '/enrollments', label: 'Enrollments', roles: ENROLLMENT_ROLES },
   { to: '/users', label: 'Users & admins', roles: SUPER_ROLES },
+  { to: '/profile', label: 'School profile', roles: SUPER_ROLES },
 ];
 
 function Shell() {
@@ -74,6 +76,7 @@ export default function App() {
         </Route>
         <Route element={<RoleGate roles={SUPER_ROLES} />}>
           <Route path="users" element={<Users />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<h1>Page not found</h1>} />
       </Route>

@@ -36,6 +36,10 @@ export function Pager({ page, hasNext, linkFor }) {
   );
 }
 
+export function Paragraphs({ text }) {
+  return text.split(/\n\s*\n/).filter((s) => s.trim()).map((p, i) => <p key={i}>{p}</p>);
+}
+
 export function DocList({ docs, enrollmentId, token, onDelete }) {
   if (!docs || !docs.length) return <p className="muted">No documents uploaded yet.</p>;
   return (

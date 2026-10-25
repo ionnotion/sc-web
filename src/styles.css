@@ -78,3 +78,4 @@ dt{font-weight:600;margin-top:10px}dd{margin:0}
 .top nav a.active{color:var(--accent);font-weight:600}
 .side nav a.active{background:var(--line);font-weight:600}
 .filters a.active{font-weight:700;text-decoration:underline}
+.prose p{white-space:pre-line}

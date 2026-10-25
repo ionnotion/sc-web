@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { SITE } from '../../lib/config.js';
 import { request } from '../../lib/api.js';
 import { useAsync } from '../../lib/hooks.js';
-import { Async } from '../../lib/ui.jsx';
+import { useProfile } from '../../lib/profile.js';
+import { Async, Paragraphs } from '../../lib/ui.jsx';
 import PostCard from './PostCard.jsx';
 
 export function Home() {
@@ -30,30 +31,42 @@ export function Home() {
 }
 
 export function About() {
+  const state = useProfile();
   return (
-    <>
-      <h1>About us</h1>
-      <p>Replace this text with your school's story, vision and mission.</p>
-      <h2>Vision</h2>
-      <p>Your vision statement.</p>
-      <h2>Mission</h2>
-      <p>Your mission statement.</p>
-      <h2>Programs</h2>
-      <p>Describe your levels and programs.</p>
-    </>
+    <Async state={state}>
+      {() => {
+        const p = state.profile;
+        return (
+          <div className="prose">
+            <h1>About us</h1>
+            {p.about_us ? <Paragraphs text={p.about_us} /> : <p className="muted">This page has not been filled in yet.</p>}
+            {p.vision && (<><h2>Vision</h2><Paragraphs text={p.vision} /></>)}
+            {p.mission && (<><h2>Mission</h2><Paragraphs text={p.mission} /></>)}
+          </div>
+        );
+      }}
+    </Async>
   );
 }
 
 export function Contact() {
+  const state = useProfile();
   return (
-    <>
-      <h1>Contact</h1>
-      <dl>
-        <dt>Address</dt><dd>{SITE.address}</dd>
-        <dt>Phone</dt><dd>{SITE.phone}</dd>
-        <dt>Email</dt><dd><a href={'mailto:' + SITE.email}>{SITE.email}</a></dd>
-      </dl>
-    </>
+    <Async state={state}>
+      {() => {
+        const p = state.profile;
+        return (
+          <>
+            <h1>Contact</h1>
+            <dl className="prose">
+              {p.address && (<><dt>Address</dt><dd><p>{p.address}</p></dd></>)}
+              {p.phone && (<><dt>Phone</dt><dd>{p.phone}</dd></>)}
+              {p.email && (<><dt>Email</dt><dd><a href={'mailto:' + p.email}>{p.email}</a></dd></>)}
+            </dl>
+          </>
+        );
+      }}
+    </Async>
   );
 }
 
