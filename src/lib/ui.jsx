@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { DOC_TYPES, STATUS } from './config.js';
-import { downloadFile } from './api.js';
+import { STATUS } from './config.js';
 
 export function Alert({ type = 'error', children }) {
   return children ? <div className={'alert ' + type}>{children}</div> : null;
@@ -36,31 +35,10 @@ export function Pager({ page, hasNext, linkFor }) {
   );
 }
 
+// Renders text with blank lines as paragraph breaks (single newlines are kept via CSS .prose p).
 export function Paragraphs({ text }) {
-  return text.split(/\n\s*\n/).filter((s) => s.trim()).map((p, i) => <p key={i}>{p}</p>);
-}
-
-export function DocList({ docs, enrollmentId, token, onDelete }) {
-  if (!docs || !docs.length) return <p className="muted">No documents uploaded yet.</p>;
-  return (
-    <ul className="docs">
-      {docs.map((d) => (
-        <li key={d.id}>
-          <strong>{DOC_TYPES[d.doc_type] || d.doc_type}</strong> — {d.original_name}{' '}
-          <small>({Math.max(1, Math.round(d.size_bytes / 1024))} KB)</small>{' '}
-          <button
-            className="link"
-            onClick={() =>
-              downloadFile(`/enrollments/${enrollmentId}/documents/${d.id}`, token, d.original_name).catch((e) => alert(e.message))
-            }
-          >
-            Download
-          </button>
-          {onDelete && (
-            <button className="link danger" onClick={() => onDelete(d)}>Remove</button>
-          )}
-        </li>
-      ))}
-    </ul>
-  );
+  return text
+    .split(/\n\s*\n/)
+    .filter((s) => s.trim())
+    .map((p, i) => <p key={i}>{p}</p>);
 }

@@ -4,7 +4,8 @@ import { request } from '../../lib/api.js';
 import { DOC_TYPES } from '../../lib/config.js';
 import { useAsync } from '../../lib/hooks.js';
 import { fmtDate } from '../../lib/format.js';
-import { Alert, Async, DocList, StatusBadge } from '../../lib/ui.jsx';
+import { Alert, Async, StatusBadge } from '../../lib/ui.jsx';
+import { DocList, FilePreview } from '../../lib/DocList.jsx';
 import EnrollmentForm from '../../lib/EnrollmentForm.jsx';
 import { useAuth } from '../auth.js';
 
@@ -124,6 +125,7 @@ function UploadForm({ id, onDone }) {
         {Object.entries(DOC_TYPES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
       </select>
       <input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => setFile(e.target.files[0] || null)} />
+      <FilePreview file={file} />
       <button className="btn small" disabled={busy}>{busy ? 'Uploading…' : 'Upload'}</button>
       <small className="muted">PDF, JPG or PNG, max 5 MB.</small>
     </form>

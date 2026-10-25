@@ -4,7 +4,8 @@ import { request } from '../../lib/api.js';
 import { STATUS } from '../../lib/config.js';
 import { useAsync } from '../../lib/hooks.js';
 import { fmtDate, qs } from '../../lib/format.js';
-import { Alert, Async, DocList, Field, Pager, StatusBadge } from '../../lib/ui.jsx';
+import { Alert, Async, Field, Pager, StatusBadge } from '../../lib/ui.jsx';
+import { DocList } from '../../lib/DocList.jsx';
 import EnrollmentForm from '../../lib/EnrollmentForm.jsx';
 import { useAuth } from '../auth.js';
 
